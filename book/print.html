@@ -1,0 +1,916 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Golang Learning</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Variables.html"><strong aria-hidden="true">1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="Formatting.html"><strong aria-hidden="true">2.</strong> Formatting</a></li><li class="chapter-item expanded "><a href="Conditionals.html"><strong aria-hidden="true">3.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="Functions.html"><strong aria-hidden="true">4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="Struct.html"><strong aria-hidden="true">5.</strong> Structs</a></li><li class="chapter-item expanded "><a href="Interfaces.html"><strong aria-hidden="true">6.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="Errors.html"><strong aria-hidden="true">7.</strong> Errors</a></li><li class="chapter-item expanded "><a href="Loops.html"><strong aria-hidden="true">8.</strong> Loops</a></li><li class="chapter-item expanded "><a href="Slices.html"><strong aria-hidden="true">9.</strong> Slices</a></li><li class="chapter-item expanded "><a href="Maps.html"><strong aria-hidden="true">10.</strong> Maps</a></li><li class="chapter-item expanded "><a href="Advanced_Fuctions.html"><strong aria-hidden="true">11.</strong> Advanced Fuctions</a></li><li class="chapter-item expanded "><a href="Pointers.html"><strong aria-hidden="true">12.</strong> Pointers</a></li><li class="chapter-item expanded "><a href="Package.html"><strong aria-hidden="true">13.</strong> Package</a></li><li class="chapter-item expanded "><a href="Channels_And_Concurrency.html"><strong aria-hidden="true">14.</strong> Channels & Concurrency</a></li><li class="chapter-item expanded "><a href="Mutex.html"><strong aria-hidden="true">15.</strong> Mutex</a></li><li class="chapter-item expanded "><a href="Generics.html"><strong aria-hidden="true">16.</strong> Generics</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Golang Learning</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
+<h3 id="golang-variables-type"><a class="header" href="#golang-variables-type">Golang Variables Type</a></h3>
+<ul>
+<li><code>bool</code></li>
+<li><code>string</code></li>
+<li><code>int int8 int16 int32 int64</code></li>
+<li><code>uint uint8 uint16 uint32 uint64</code></li>
+<li><code>byte</code> : for uint8</li>
+<li><code>rune</code> : for int32, to represents a Unicode code point</li>
+<li><code>float32 float64</code></li>
+<li><code>complex64 complex128</code></li>
+</ul>
+<pre><code class="language-Golang">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    // initialize variables
+    var num int
+    var flo float64
+    var isTrue bool
+    var name string
+
+    fmt.Printf(
+        &quot;%v %f %v %q\n&quot;,
+        num, flo, isTrue, name
+    )
+}
+</code></pre>
+<h3 id="variable-declaration"><a class="header" href="#variable-declaration">Variable Declaration</a></h3>
+<pre><code class="language-Golang">var empty string // same as `empty := &quot;&quot;`
+num := 10 // inferred to be an integer
+temperature := 0.0 // inferred to be a floating
+var isFunny = true // inferred to be a boolean
+</code></pre>
+<h3 id="casting"><a class="header" href="#casting">Casting</a></h3>
+<pre><code class="language-Golang">temperatureInt := 88
+temperatureFloat := float64(temperatureInt)
+</code></pre>
+<h3 id="const"><a class="header" href="#const">Const</a></h3>
+<ul>
+<li><strong>Constants</strong> must be known at compile time.</li>
+<li><strong>Constants</strong> can be computed so long as the computation can happen at compile time.</li>
+</ul>
+<pre><code class="language-Golang">const num = 15
+const numPlusOne = num +1
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="formatting"><a class="header" href="#formatting">Formatting</a></h1>
+<h3 id="fmt"><a class="header" href="#fmt">fmt</a></h3>
+<ul>
+<li><code>fmt.Printf()</code> : Prints a formatted string to <strong>standard out</strong></li>
+<li><code>fmt.Sprintf()</code>: Returns the formatted string</li>
+</ul>
+<h3 id="v---interpolate-the-default-representation"><a class="header" href="#v---interpolate-the-default-representation"><code>%v</code> - Interpolate the default representation</a></h3>
+<pre><code class="language-golang">fmt.Printf(&quot;I am %v years old&quot;, 10)
+fmt.Printf(&quot;I am %v years old&quot;, &quot;ten&quot;)
+</code></pre>
+<h3 id="s---interpolate-a-string"><a class="header" href="#s---interpolate-a-string"><code>%s</code> - Interpolate a string</a></h3>
+<pre><code class="language-golang">fmt.Printf(&quot;I am %s years old&quot;, &quot;ten&quot;)
+</code></pre>
+<h3 id="d---interpolate-an-integer-in-decimal-form"><a class="header" href="#d---interpolate-an-integer-in-decimal-form"><code>%d</code> - Interpolate an integer in decimal form</a></h3>
+<pre><code class="language-golang">fmt.Printf(&quot;I am %d years old&quot;, 10)
+</code></pre>
+<h3 id="f---interpolate-a-decimal"><a class="header" href="#f---interpolate-a-decimal"><code>%f</code> - Interpolate a decimal</a></h3>
+<pre><code class="language-golang">fmt.Printf(&quot;I am %f years old&quot;, 10.523)
+
+// The &quot;.2&quot; rounds the number to 2 decimal places
+fmt.Printf(&quot;I am %.2f years old&quot;, 10.523)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="conditionals"><a class="header" href="#conditionals">Conditionals</a></h1>
+<h3 id="if-else-if-else"><a class="header" href="#if-else-if-else"><code>if, else if, else</code></a></h3>
+<pre><code class="language-golang">if height &gt; 6 {
+    fmt.Println(&quot;You are super tall!&quot;)
+} else if height &gt; 4 {
+    fmt.Println(&quot;You are tall enough!&quot;)
+} else {
+    fmt.Println(&quot;You are not tall enough!&quot;)
+}
+</code></pre>
+<h3 id="switch"><a class="header" href="#switch"><code>switch</code></a></h3>
+<pre><code class="language-golang">switch n {
+case 1:
+    fmt.Println(&quot;red&quot;)
+case 2:
+    fmt.Println(&quot;blue&quot;)
+case 3:
+    fmt.Println(&quot;green&quot;)
+default:
+    fmt.Println(&quot;black&quot;)
+}
+</code></pre>
+<h3 id="if--conditional-"><a class="header" href="#if--conditional-"><code>if ; CONDITIONAL {}</code></a></h3>
+<pre><code class="language-golang">if length := getLength(email); length &lt; 1 {
+    fmt.Println(&quot;Email is invalid&quot;)
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
+<p>Functions in Go can take zero or more argements.</p>
+<pre><code class="language-golang">func sub(x int, y int) int {
+    return x-y
+}
+
+func add(x, y int) int {
+    return x + y
+}
+
+func swap(x, y string) (string, string) {
+	return y, x
+}
+</code></pre>
+<h3 id="passing-variables-by-value"><a class="header" href="#passing-variables-by-value">Passing variables by value</a></h3>
+<pre><code class="language-golang">func main(){
+    x := 5
+    increment(x)
+
+    fmt.Println(x)
+    // still prints 5
+    // because the function received a copy of x
+}
+
+func increment(x int) {
+    x++
+}
+</code></pre>
+<h3 id="ignoring-return-values"><a class="header" href="#ignoring-return-values">Ignoring return values</a></h3>
+<pre><code class="language-golang">func swap(x, y string) (string, string) {
+	return y, x
+}
+
+// ignore a value
+x, _ := swap(&quot;one&quot;, &quot;two&quot;)
+</code></pre>
+<h3 id="named-return-values"><a class="header" href="#named-return-values">Named return values</a></h3>
+<pre><code class="language-golang">func getCoords() (x, y int) {
+    // x and y are initialized with zero values
+    return // automatically returns x and y
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="structs"><a class="header" href="#structs">Structs</a></h1>
+<p>Group different types of variables together</p>
+<pre><code class="language-golang">type Car struct {
+    Make string
+    Model string
+    Height int
+    Width int
+}
+</code></pre>
+<h3 id="nested-struct"><a class="header" href="#nested-struct">Nested Struct</a></h3>
+<pre><code class="language-golang">type Car sturct {
+    Make string
+    Model string
+    Height int
+    Width int
+    FrontWheel Wheel
+    BackWheel Wheel
+} 
+
+type Wheel struct {
+    Radius int
+    Material string
+}
+</code></pre>
+<p>The fields of a struct can be accessed using the <code>.</code> operator.</p>
+<pre><code class="language-golang">myCar := car{}
+myCar.FrontWheel.Radius = 5
+</code></pre>
+<h3 id="embedded-struct"><a class="header" href="#embedded-struct">Embedded Struct</a></h3>
+<pre><code class="language-golang">type Address struct {
+    City  string
+    State string
+}
+  
+type Person struct {
+    Name    string
+    Address //embedded struct
+}
+
+func main() {
+    p := Person{
+        Name: &quot;John Doe&quot;,
+        Address: Address{
+            City:  &quot;New York&quot;,
+            State: &quot;NY&quot;,
+        },
+    }
+  
+    fmt.Println(&quot;Name:&quot;, p.Name)
+    // embedded fields promoted to the top-level
+    fmt.Println(&quot;City:&quot;, p.City)
+    fmt.Println(&quot;State:&quot;, p.State)
+}
+</code></pre>
+<h3 id="struct-method"><a class="header" href="#struct-method">Struct Method</a></h3>
+<pre><code class="language-golang">type rect struct {
+    width int
+    height int
+}
+
+// area has a receiver of (r rect)
+func (r rect) area() int {
+    return r.width * r.height
+}
+
+r := rect{
+    width: 5,
+    height: 10,
+}
+
+fmt.Println(r.area())
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="interfaces"><a class="header" href="#interfaces">Interfaces</a></h1>
+<p>Interfaces are collections of methods signatures.</p>
+<p>A type &quot;implements&quot; an interface</p>
+<ul>
+<li>if it has all of the methods of the given interface defined on it.</li>
+</ul>
+<pre><code class="language-golang">type shape interface {
+    area() float64
+    perimeter() float64
+}
+
+type rect struct {
+    width, height float64
+}
+
+func (r rect) area() float64 {
+    return r.width * r.height
+}
+
+func (r rect) perimeter() float64 {
+    return 2*r.width + 2*height
+}
+
+type circle struct {
+    radius float64
+}
+
+func (c circle) area() float64 {
+    return math.Pi * c.radius * c.radius
+}
+
+func (c circle) perimeter() float64 {
+    return 2* math.Pi * c.radius
+}
+</code></pre>
+<h3 id="name-interface-arguments"><a class="header" href="#name-interface-arguments">Name Interface Arguments</a></h3>
+<pre><code class="language-golang">type Copier interface {
+    Copy(source string, destination string) (isCopied int)
+}
+// origin: 
+// type Copier interface { 
+//     Copy(string, string) int
+// }
+</code></pre>
+<h3 id="type-assertions"><a class="header" href="#type-assertions">Type Assertions</a></h3>
+<p>Golang provides a simple way of checking if an interface value is of a specific type. </p>
+<ul>
+<li>generally used to make sure that an interface value satisfies another interface </li>
+<li>find the concrete type of the interface.</li>
+</ul>
+<pre><code class="language-golang">func main() {
+	var i interface{} = &quot;hello&quot;
+
+	s := i.(string)
+	fmt.Println(s)
+
+	s, ok := i.(string)
+	fmt.Println(s, ok)
+
+	f, ok := i.(float64)
+	fmt.Println(f, ok)
+
+	f = i.(float64) // panic
+	fmt.Println(f)
+}
+</code></pre>
+<h3 id="type-switches"><a class="header" href="#type-switches">Type Switches</a></h3>
+<p>A <code>type switch</code> makes it easy to do several type assertions in a series.</p>
+<pre><code class="language-golang">func printNumericValue(num interface{}) {
+    switch v := num.(type) {
+    case int:
+        fmt.Printf(&quot;%T\n&quot;, v)
+    case string:
+        fmt.Printf(&quot;%T\n&quot;, v)
+    default:
+        fmt.Printf(&quot;%T\n&quot;, v)
+    }
+}
+</code></pre>
+<h3 id="clean-interfaces"><a class="header" href="#clean-interfaces">Clean Interfaces</a></h3>
+<ol>
+<li>Keep Interface small</li>
+</ol>
+<pre><code class="language-golang">type File interface {
+    io.Closer
+    io.Reader
+    io.Seeker
+    Readdir(count int) ([]os.FileInfo, error)
+    Stat() (os.FileInfo, error)
+}
+</code></pre>
+<ol start="2">
+<li>Interface should have no knowledge of satisfying types</li>
+<li>Interface are not classes</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="errors"><a class="header" href="#errors">Errors</a></h1>
+<p>Go programs express errors with <code>error</code> values.
+An <strong>Error</strong> is any type that implements the built-in <strong>error interface</strong>:</p>
+<pre><code class="language-golang">type error interface {
+    Error() string
+}
+</code></pre>
+<p>A function that can return an <code>error</code> should handle errors by testing whether the error is <code>nil</code>.</p>
+<pre><code class="language-golang">i, err := strconv.Atoi(&quot;42b&quot;)
+if err != nil {
+    fmt.Println(&quot;couldn't convert:&quot;, err)
+    return
+}
+</code></pre>
+<h3 id="custom-error"><a class="header" href="#custom-error">Custom Error</a></h3>
+<p>Build the custom types that implement the <code>error</code> interface.</p>
+<pre><code class="language-golang">type userError struct {
+    name string
+}
+
+func (e userError) Error() string {
+    return fmt.Sprintf(&quot;%v has a problem&quot;, e.name)
+}
+</code></pre>
+<p>It can then be used as an error:</p>
+<pre><code class="language-golang">func sendSMS(msg, userName string) error {
+    if !canSendToUser(userName) {
+        return userError{name: userName}
+    }
+}
+</code></pre>
+<h3 id="the-error-package"><a class="header" href="#the-error-package">The Error Package</a></h3>
+<p><code>errors.New()</code> function:</p>
+<pre><code class="language-golang">var err error = errors.New(&quot;something went wrong&quot;)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="loops"><a class="header" href="#loops">Loops</a></h1>
+<pre><code class="language-golang">for i := 0; i &lt; 10; i++ {
+    fmt.Println(i)
+}
+</code></pre>
+<h3 id="for-condition"><a class="header" href="#for-condition"><code>for CONDITION</code></a></h3>
+<p>There is no <code>while</code> loop in golang.</p>
+<pre><code class="language-golang">height := 1
+for height &lt; 5 {
+    fmt.Println(&quot;still growing! current height:&quot;, height)
+    height++
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="slices"><a class="header" href="#slices">Slices</a></h1>
+<p>Arrays are fixed in size. Once you make an array like <code>[10]int</code> you can't add an 11th element.</p>
+<ul>
+<li>A slice is a dynamically-sized, flexible view of the elements of an array.</li>
+</ul>
+<pre><code class="language-golang">primes := [6]int{2, 3, 5, 7, 11, 13}
+mySlice := primes[1:4]
+</code></pre>
+<p>Slice syntax:</p>
+<pre><code class="language-golang">arrayName[lowIndex: highIndex]
+arrayName[lowIndex:]
+arrayName[:highIndex]
+arrayName[:]
+</code></pre>
+<h3 id="make"><a class="header" href="#make"><code>make</code></a></h3>
+<p>Slices can be created with the built-in <code>make</code> function; this is how you create dynamically-sized arrays.</p>
+<pre><code class="language-golang">a := make([]int, 5)  // len(a)=5
+
+b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+b = b[:cap(b)] // len(b)=5, cap(b)=5
+b = b[1:]      // len(b)=4, cap(b)=4
+</code></pre>
+<h3 id="variadic"><a class="header" href="#variadic">Variadic</a></h3>
+<p>A variadic function receives the variadic arguments as a slice.</p>
+<pre><code class="language-golang">func sum(nums ...int) int {
+    num := 0
+
+    // nums is just a slice
+    for i := 0; i &lt; len(nums); i++ {
+        num = nums[i] + num
+    }
+    return num
+}
+
+func main() {
+    total := sum(1, 2, 3)
+    fmt.Println(total)
+}
+</code></pre>
+<h3 id="range"><a class="header" href="#range"><code>range</code></a></h3>
+<p>Go provides syntatic sugar to iterate easily over elements of a slice:</p>
+<pre><code class="language-golang">for INDEX, ELEMENT := range SLICE {
+
+}
+</code></pre>
+<p>example:</p>
+<pre><code class="language-golang">fruits := []string{&quot;apple&quot;, &quot;banana&quot;, &quot;grape&quot;}
+for i, fruit := range fruits {
+    fmt.Println(i, fruit)
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="maps"><a class="header" href="#maps">Maps</a></h1>
+<p>Maps are similar to javascript objects, python dictionaries, and ruby hashes. Maps are a data structure that provides key value mapping.</p>
+<ul>
+<li>The zero value of a map is <code>nil</code>.</li>
+</ul>
+<pre><code class="language-golang">ages := make(map[string]int)
+ages[&quot;John&quot;] = 37
+ages[&quot;Mary&quot;] = 24
+</code></pre>
+<pre><code class="language-golang">ages = map[string]int {
+    &quot;John&quot;: 37,
+    &quot;Mary&quot;: 24,
+}
+</code></pre>
+<h3 id="mutations"><a class="header" href="#mutations">Mutations</a></h3>
+<ul>
+<li>
+<p>Insert an element</p>
+<pre><code class="language-golang">m[key] = elem
+</code></pre>
+</li>
+<li>
+<p>Get an element</p>
+<pre><code class="language-golang">elem = m[key]
+</code></pre>
+</li>
+<li>
+<p>Delete an element</p>
+<pre><code class="language-golang">delete(m, key)
+</code></pre>
+</li>
+<li>
+<p>Check if a key exists</p>
+<pre><code class="language-golang">elem, ok := m[key]
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advanced-fuctions"><a class="header" href="#advanced-fuctions">Advanced Fuctions</a></h1>
+<p>In Go, functions are <strong>first-class</strong> values. This means that you can do with functions the same things you can do with all other values.</p>
+<ul>
+<li>assign functions to variables, pass them as arguments to other functions or even return functions from other functions.</li>
+</ul>
+<pre><code class="language-golang">func add(x, y int) int {
+    return x + y
+}
+
+func mul(x, y int) int {
+    return x * y
+}
+
+// Accept a function as a parameter
+func aggregate(a, b, c int, arithmetic func(int, int) int) int {
+    return arithmetic(arithmetic(a, b), c)
+} 
+
+func main() {
+    fmt.Println(aggregate(2, 3, 4, add))
+    fmt.Println(aggregate(2, 3, 4, mul))
+}
+</code></pre>
+<pre><code class="language-golang">func getPlusNum(num int) func(int) int {
+    return func(x int) {
+        return x + num
+    }
+}
+
+plusOne := getPlusNum(1)
+</code></pre>
+<h3 id="defer"><a class="header" href="#defer"><code>defer</code></a></h3>
+<p>The <code>defer</code> keyword is a fairly unique feature of Go. It allows a function to be executed automatically <em>just before</em> its enclosing function returns.</p>
+<p>Deferred functions are typically used to close database connections, file handlers, etc.</p>
+<pre><code class="language-golang">func CopyFile(dstName, srcName string) (written int64, err error) {
+    // Open the source file
+    src, err := os.Open(srcName)
+    if err != nil {
+        return
+    }
+
+    // Close the source file when the CopyFile function returns
+    defer src.Close()
+
+    // Create the destination file
+    dst, err := os.Create(dstName)
+    if err != nil {
+        return
+    }
+
+    // Close the destination file when CopyFile function returns
+    defer dst.Close()
+
+    return io.Copy(dst, src)
+}
+</code></pre>
+<h3 id="closures"><a class="header" href="#closures">Closures</a></h3>
+<p>A closure is a function that references variables from outside its own function body. The function may access and <em>assign</em> to the referenced variables.</p>
+<pre><code class="language-golang">func concatter() func(string) string {
+    doc := &quot;&quot;
+    return func(word string) string {
+        doc += word + &quot; &quot;
+        return doc
+    }
+}
+
+func main() {
+    onePlus := concatter()
+    onePlus(&quot;One&quot;)
+    onePlus(&quot;plus&quot;)
+    fmt.Println(onePlus(&quot;two&quot;)) 
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pointers"><a class="header" href="#pointers">Pointers</a></h1>
+<p>A pointer is a variable that stores the <em>memory address</em> of another variable.</p>
+<p>The <code>*</code> syntax defines a pointer:</p>
+<pre><code class="language-golang">var p *int
+</code></pre>
+<p>The <code>&amp;</code> operator generates a pointer to its operand. Get the address of a variable.</p>
+<pre><code class="language-golang">myString := &quot;hello&quot;
+var myString = &amp;myString
+</code></pre>
+<h3 id="why-are-pointers-useful"><a class="header" href="#why-are-pointers-useful">Why are pointers useful?</a></h3>
+<p>Pointers allow us to manipulate data in memory directly, without making copies or duplicating data.</p>
+<h3 id="access-the-value-by-address"><a class="header" href="#access-the-value-by-address">Access the value by address</a></h3>
+<p>The <code>*</code> dereferences a pointer to gain access to the value</p>
+<pre><code class="language-golang">fmt.Println(*myStringPtr) // read myString through the pointer
+*myStringPtr = &quot;world&quot;    // set myString through the pointer
+</code></pre>
+<p>Unlike C, Go has no <strong>pointer arithmetic</strong>.</p>
+<h3 id="pointer-receiver"><a class="header" href="#pointer-receiver">Pointer Receiver</a></h3>
+<p>A receiver type on a method can be a pointer.</p>
+<pre><code class="language-golang">type car struct {
+    color string
+}
+
+func (c *car) setColor(color string) {
+    c.color = color
+}
+
+func main() {
+    c := car{
+        color: &quot;white&quot;
+    }
+    c.setColor(&quot;blue&quot;)
+    fmt.Println(c.color)
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="package"><a class="header" href="#package">Package</a></h1>
+<p>A package is a container that contains various functions to perform specific tasks.</p>
+<p>While working on big projects, we have to deal with a large amount of code, and writing everything together in the same file will make our code look messy. </p>
+<h3 id="package-naming"><a class="header" href="#package-naming">Package Naming</a></h3>
+<p>A Go package has both a name and a path. The package name is specified in the package statement of its source files; client code uses it as the prefix for the package’s exported names.</p>
+<p>Client code uses the package path when importing the package.</p>
+<pre><code class="language-golang">import (
+    &quot;context&quot;                // package context
+    &quot;fmt&quot;                    // package fmt
+    &quot;golang.org/x/time/rate&quot; // package rate
+    &quot;os/exec&quot;                // package exec
+)
+</code></pre>
+<h3 id="one-package--directory"><a class="header" href="#one-package--directory">One Package / Directory</a></h3>
+<p>A directory of Go code have <strong>at most</strong> one package.</p>
+<ul>
+<li>All <code>.go</code> files in a single directory must all belong to the same package.</li>
+</ul>
+<h3 id="modules"><a class="header" href="#modules">Modules</a></h3>
+<p>Go programs are organized into <em>packages</em>. A Package is a directory of Go code that's all compiled together. Functions, types, variables, and constants defined in one source file are visible to <strong>all other source files within the same package(directory)</strong>.</p>
+<p>A <em>repository</em> contains one or more <em>modules</em>. A module is a collection of Go packages that are released together.</p>
+<h3 id="go-repository"><a class="header" href="#go-repository">Go Repository</a></h3>
+<p>A Go repository typically contains only one module, located at the root of the repository.</p>
+<p>A file named <code>go.mod</code> at the root of a project declares the module.
+It contains:</p>
+<ul>
+<li>The module path</li>
+<li>The version of the Go language that the project requires</li>
+<li>Optionally any external package dependencies you project has</li>
+</ul>
+<h3 id="create-a-module"><a class="header" href="#create-a-module">Create a module</a></h3>
+<pre><code class="language-bash">mkdir hellogo
+cd hellogo
+</code></pre>
+<p>Inside the directory declare the module's name:</p>
+<pre><code class="language-bash">go mod init {REMOTE}/{USERNAME}/hellogo
+</code></pre>
+<p>Where <code>{REMOTE}</code> is your preferred remote source provider (i.e. <code>github.com</code>) and <code>{USERNAME}</code> is your Git username. If you don't use a remote provider yet, just use <code>example.com/username/hellogo</code></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="channels--concurrency"><a class="header" href="#channels--concurrency">Channels &amp; Concurrency</a></h1>
+<h3 id="what-is-concurrency"><a class="header" href="#what-is-concurrency">What is Concurrency?</a></h3>
+<p><strong>Concurrency</strong> is the ability to <strong>perform multiple tasks</strong> at the same time.
+Typically, our code is executed one line at a time, one after the other; This is called <em>sequential execution</em> or <em>synchronous execution</em>.</p>
+<h3 id="how-does-concurrency-work-in-go"><a class="header" href="#how-does-concurrency-work-in-go">How does concurrency work in Go?</a></h3>
+<p>Go was designed to be concurrent, which is a trait <em>fairly</em> unique to Go. It excels at performing many tasks simultaneously safely using a simple syntax.</p>
+<p>Concurrency is as simple as using the <code>go</code> keyword when calling a function:</p>
+<pre><code class="language-golang">go doSomething()
+</code></pre>
+<h3 id="channels"><a class="header" href="#channels">Channels</a></h3>
+<p>Channels are a typed, thread-safe queue. Channels allow different goroutines to communicate with each other.</p>
+<h4 id="create-a-channel"><a class="header" href="#create-a-channel">Create a channel</a></h4>
+<p>Like maps and slices, channels must be created <em>before</em> use. They also use the same <code>make</code> keyword:</p>
+<pre><code class="language-golang">ch := make(chan int)
+</code></pre>
+<h4 id="send-data-to-a-channel"><a class="header" href="#send-data-to-a-channel">Send data to a channel</a></h4>
+<pre><code class="language-golang">ch &lt;- 10
+</code></pre>
+<p>The <code>&lt;-</code> operator is called the <em>channel operator</em>. Data flows in the direction of the arrow. This operation will <em>block</em> until another goroutine is ready to receive the value.</p>
+<h4 id="receive-data-from-a-channel"><a class="header" href="#receive-data-from-a-channel">Receive data from a channel</a></h4>
+<pre><code class="language-golang">v := &lt;- ch
+</code></pre>
+<ul>
+<li>This reads and removes a value from the channel and saves it into the variable <code>v</code>.</li>
+<li>This operator will <em>block</em> until there is a value in the channel to be read.</li>
+</ul>
+<h4 id="blocking-and-deadlocks"><a class="header" href="#blocking-and-deadlocks">Blocking and deadlocks</a></h4>
+<p>A <code>deadlock</code> is when a group of goroutines are all blocking so none of them can continue. This is a common bug that you need to watch out for in concurrent programming.</p>
+<h3 id="buffered-channels"><a class="header" href="#buffered-channels">Buffered Channels</a></h3>
+<p>Channels can <em>optionally</em> be buffered.</p>
+<h4 id="creating-a-channel-with-a-buffer"><a class="header" href="#creating-a-channel-with-a-buffer">Creating a channel with a buffer</a></h4>
+<p>You can provide a buffer length as the second argument to <code>make()</code> to create a buffered channel:</p>
+<pre><code class="language-golang">ch := make(chan int, 100)
+</code></pre>
+<p>Sending on a buffered channel only blocks when the buffer is full.
+Receiving blocks only when the buffers is empty.</p>
+<h4 id="closing-channels-in-go"><a class="header" href="#closing-channels-in-go">Closing Channels in Go</a></h4>
+<p>Channels can be explicitly closed by a sender.</p>
+<pre><code class="language-golang">ch := make(chan int)
+
+// do something with the channel
+
+close(ch)
+</code></pre>
+<h4 id="checking-if-a-channel-is-closed"><a class="header" href="#checking-if-a-channel-is-closed">Checking if a channel is closed</a></h4>
+<p>Similar to the <code>ok</code> value when accessing data in a <code>map</code>, receivers can check the <code>ok</code> value when receiving from a channel to test if a channel was closed.</p>
+<pre><code class="language-golang">v, ok := &lt;- ch
+</code></pre>
+<p>ok is <code>false</code> if the channel is empty and closed.</p>
+<h3 id="dont-send-on-a-closed-channel"><a class="header" href="#dont-send-on-a-closed-channel">Don't send on a closed channel</a></h3>
+<p>Sending on a closed channel will cause a panic. A panic on the main goroutine will cause that goroutine to crash.</p>
+<ul>
+<li>Closing isn't necessary.</li>
+<li>There is nothing wrong with leaving channels open, they will still be garbage collected if they are unused.</li>
+</ul>
+<h3 id="read-only-channels"><a class="header" href="#read-only-channels">Read-only channels</a></h3>
+<p>A channel can be marked as read-only by casting it from a <code>chan</code> to a <code>&lt;-chan</code> type.</p>
+<pre><code class="language-golang">func readCh(ch &lt;-chan int) {
+    // ch can only be read in this function
+}
+
+func main() {
+    ch := make(chan int)
+    readCh(ch)
+}
+</code></pre>
+<h3 id="write-only-channels"><a class="header" href="#write-only-channels">Write-only channels</a></h3>
+<p>The same goes for write-only channels, but the arrow's position moves.</p>
+<pre><code class="language-golang">func writeCh(ch chan&lt;- int) {
+    // ch can only be written in this function.
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mutex"><a class="header" href="#mutex">Mutex</a></h1>
+<p>Mutexes allow us to <em>lack</em> access to data.
+This ensures that we can control which goroutines can access certain data at which time.</p>
+<p>Go's standard library provides a build-in implementation of a mutex with the <code>sync.Mutex</code> type and its two methods:</p>
+<ul>
+<li><code>Lock()</code></li>
+<li><code>Unlock()</code></li>
+</ul>
+<p>We can protect a block of code by surrounding it with a call to <code>Lock</code> and <code>Unlock</code> as shown on the <code>protected()</code> method below.</p>
+<p>It's good practice to structure the protected code within a function so that <code>defer</code> can be used to ensure that we never forget to unlock the mutex.</p>
+<pre><code class="language-golang">func protected() {
+    mux.Lock()
+    defer mux.Unlock()
+}
+</code></pre>
+<h3 id="maps-are-not-thread-safe"><a class="header" href="#maps-are-not-thread-safe">Maps are not thread-safe</a></h3>
+<p>Maps are not safe for concurrent use! If you have multiple goroutines accessing the same map, and at least one of them is writing to the map, you must lock your maps with a mutex.</p>
+<p><strong>Noted: WASM is single-threaded</strong></p>
+<h3 id="rw-mutex"><a class="header" href="#rw-mutex">RW Mutex</a></h3>
+<p>The standard library also exposes a <code>sync.RWMutex</code>.
+The <code>sync.RWMutex</code> also has these methods:</p>
+<ul>
+<li><code>RLock()</code></li>
+<li><code>RUnlock()</code></li>
+<li><code>Lock()</code></li>
+<li><code>Unlock()</code></li>
+</ul>
+<p>The <code>sync.RWMutex</code> can help with performance if we have a read-intensive process. Many goroutines can safely read from the map at the same time (multiple <code>Rlock()</code> calls can happen simultaneously). However, only one goroutine can hold a <code>Lock()</code> and all <code>RLock()</code>'s will also be excluded.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generics"><a class="header" href="#generics">Generics</a></h1>
+<h3 id="type-parameters"><a class="header" href="#type-parameters">Type Parameters</a></h3>
+<p>Generics allow us to use variables to refer to specific types. It allows us to write abstract functions that drastically reduce code duplication.</p>
+<pre><code class="language-golang">func splitAnySlice[T any] (s []T) ([]T, []T) {
+    mid := len(s)/2
+    return s[:mid], s[mid:]
+}
+</code></pre>
+<pre><code class="language-golang">firstInts, secondInts := splitAnySlice([]int{0, 1, 2, 3})
+fmt.Println(firstInts, secondInts)
+</code></pre>
+<h3 id="constraints"><a class="header" href="#constraints">Constraints</a></h3>
+<p>Sometimes you need the logic in your generic function to know <em>something</em> about the types it operates on. </p>
+<ul>
+<li>The constraints are just interfaces that allow us to write generics that only operate within the constraints of a given interface type.</li>
+<li>The <code>any</code> constraints is the same as the empty interface because it means the type in question can be <em>anything</em>.</li>
+</ul>
+<h3 id="create-a-custom-constraint"><a class="header" href="#create-a-custom-constraint">Create a custom constraint</a></h3>
+<pre><code class="language-golang">type stringer interface {
+    String() string
+}
+
+func concat[T stringer](vals []T) string {
+    result := &quot;&quot;
+    for _, val := range vals{
+        result += val.String()
+    }
+    return result
+}
+</code></pre>
+<h3 id="interface-type-lists"><a class="header" href="#interface-type-lists">Interface type lists</a></h3>
+<pre><code class="language-golang">// Ordered is a type constraint that matches any ordered type.
+// An ordered type is one that supports the &lt;, &lt;=, &gt;, &gt;= operators.
+type Ordered interface {
+    ~int | ~int8 | ~int16 | ~int32 | ~int64 |
+    ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+    ~float32 | ~float64 | ~string 
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,18 @@
+# Summary
+
+- [Variables](./Variables.md)
+- [Formatting](./Formatting.md)
+- [Conditionals](./Conditionals.md)
+- [Functions](./Functions.md)
+- [Structs](./Struct.md)
+- [Interfaces](./Interfaces.md)
+- [Errors](./Errors.md)
+- [Loops](./Loops.md)
+- [Slices](./Slices.md)
+- [Maps](./Maps.md)
+- [Advanced Fuctions](./Advanced_Fuctions.md)
+- [Pointers](./Pointers.md)
+- [Package](./Package.md)
+- [Channels & Concurrency](./Channels_And_Concurrency.md)
+- [Mutex](./Mutex.md)
+- [Generics](./Generics.md)
